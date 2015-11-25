@@ -184,4 +184,22 @@ class AssertionsTest extends \PHPUnit_Framework_TestCase
             'items' => self::contains(['name' => 'second'])
         ], $array);
     }
+
+    public function testAssertArrayMatchesCount()
+    {
+        $array = [
+            'items' => [
+                'foo',
+                'bar',
+                'baz',
+            ]
+        ];
+
+        $this->assertArrayMatches([
+            'items' => self::logicalAnd(
+                self::countOf(3),
+                self::arrayMatches([1 => 'bar'])
+            )
+        ], $array);
+    }
 }
