@@ -1,0 +1,27 @@
+{
+    "name": "boukeversteegh/phpunit-bliss",
+    "description": "Collection of assertions for PhpUnit",
+    "require": {
+        "phpunit/phpunit": "4.0"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Bouke Versteegh",
+            "email": "info@boukeversteegh.nl"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "PhpUnitBliss\\": "PhpUnitBliss/"
+        }
+    },
+    "autoload-dev": {
+        "classmap": [
+            "tests/TestCase.php"
+        ],
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    }
+}
