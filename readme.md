@@ -48,6 +48,7 @@ class AssertionsTest extends \PHPUnit_Framework_TestCase
     public function testComplexExample()
     {
         $array = [
+            'id' => 1,
             'age' => 25,
             'friends' => [
                 [
