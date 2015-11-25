@@ -1,5 +1,15 @@
 # PHPUnit Bliss
 
+## Installation
+
+    composer require boukeversteegh/phpunit-bliss dev-master
+
+## Usage
+
+Add ``use \PhpUnitBliss\Assertions;`` to your test class
+
+## assertArrayMatches
+
 See ``tests/AssertionsTest.php`` for many examples.
 
 Add a useful assertion to your TestCase: ``assertArrayMatches``, which allows you to test that a given array matches

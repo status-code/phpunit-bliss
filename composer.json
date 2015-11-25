@@ -2,7 +2,7 @@
     "name": "boukeversteegh/phpunit-bliss",
     "description": "Collection of assertions for PhpUnit",
     "require": {
-        "phpunit/phpunit": "4.0"
+        "phpunit/phpunit": "~4.0"
     },
     "license": "MIT",
     "authors": [
