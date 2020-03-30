@@ -1,7 +1,10 @@
 <?php
 namespace PhpUnitBliss\Constraints;
 
-class ArrayMatches extends \PHPUnit_Framework_Constraint
+use PHPUnit\Framework\Constraint\IsEqual;
+use PHPUnit\Framework\Constraint\Constraint;
+
+class ArrayMatches extends Constraint
 {
     /**
      * @var array
@@ -9,18 +12,25 @@ class ArrayMatches extends \PHPUnit_Framework_Constraint
     private $pattern;
 
     /**
-     * ArrayMatches constructor.
-     * @param array $pattern
+     * @var string
      */
-    public function __construct(array $pattern)
+    private $description;
+
+    /**
+     * ArrayMatches constructor.
+     * 
+     * @param array $pattern
+     * @param string $description
+     */
+    public function __construct(array $pattern, $description = '')
     {
-        parent::__construct();
         $this->pattern = $pattern;
+        $this->description = $description;
     }
 
-    public function matches($other, $description = '')
+    public function matches($other): bool
     {
-        $description = $description ?: '$array';
+        $description = $this->description ?: '$array';
 
         if (!is_array($other)) {
             return false;
@@ -36,11 +46,11 @@ class ArrayMatches extends \PHPUnit_Framework_Constraint
             $description .= "['$key']";
 
             if (is_array($expectedValue)) {
-                $constraint = new static($expectedValue, $otherValue, $description);
-            } elseif ($expectedValue instanceof \PHPUnit_Framework_Constraint) {
+                $constraint = new static($expectedValue, $description);
+            } elseif ($expectedValue instanceof Constraint) {
                 $constraint = $expectedValue;
             } else {
-                $constraint = new \PHPUnit_Framework_Constraint_IsEqual($expectedValue);
+                $constraint = new IsEqual($expectedValue);
             }
 
             if (!$constraint->evaluate($otherValue, $description, true)) {
@@ -51,12 +61,12 @@ class ArrayMatches extends \PHPUnit_Framework_Constraint
     }
 
 
-    protected function failureDescription($other)
+    protected function failureDescription($other): string
     {
         return sprintf(
             "\n%s\nmatches\n%s",
-            $this->exporter->export($other),
-            $this->exporter->export($this->getPrintablePattern())
+            $this->exporter()->export($other),
+            $this->exporter()->export($this->getPrintablePattern())
         );
     }
 
@@ -65,11 +75,11 @@ class ArrayMatches extends \PHPUnit_Framework_Constraint
      *
      * @return string
      */
-    public function toString()
+    public function toString(): string
     {
         return sprintf(
             "\nmatches:\n%s",
-            $this->exporter->export($this->getPrintablePattern())
+            $this->exporter()->export($this->getPrintablePattern())
         );
     }
 
@@ -78,7 +88,7 @@ class ArrayMatches extends \PHPUnit_Framework_Constraint
         $pattern = (array)$this->pattern;
 
         array_walk_recursive($pattern, function (&$value) {
-            if ($value instanceof \PHPUnit_Framework_Constraint) {
+            if ($value instanceof Constraint) {
                 $value = sprintf('%s (%s)', get_class($value), $value->toString());
             }
         });

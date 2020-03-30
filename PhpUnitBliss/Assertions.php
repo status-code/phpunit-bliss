@@ -22,6 +22,6 @@ trait Assertions
 
     public static function assertArrayNotMatches($pattern, $array, $description = '')
     {
-        self::assertThat($array, self::arrayNotMatches($pattern, $array, $description));
+        self::assertThat($array, self::arrayNotMatches($pattern, $description));
     }
 }

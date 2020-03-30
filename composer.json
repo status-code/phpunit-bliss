@@ -1,14 +1,18 @@
 {
-    "name": "boukeversteegh/phpunit-bliss",
+    "name": "status-code/phpunit-bliss",
     "description": "Collection of assertions for PhpUnit",
     "require": {
-        "phpunit/phpunit": ">=4"
+        "phpunit/phpunit": ">=6"
     },
     "license": "MIT",
     "authors": [
         {
             "name": "Bouke Versteegh",
             "email": "info@boukeversteegh.nl"
+        },
+        {
+            "name": "Martijn ter Hellen",
+            "email": "online@statuscode.nl"
         }
     ],
     "autoload": {
@@ -17,9 +21,6 @@
         }
     },
     "autoload-dev": {
-        "classmap": [
-            "tests/TestCase.php"
-        ],
         "psr-4": {
             "Tests\\": "tests/"
         }

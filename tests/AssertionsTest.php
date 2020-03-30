@@ -2,8 +2,9 @@
 namespace Tests;
 
 use PhpUnitBliss\Assertions;
+use PHPUnit\Framework\TestCase;
 
-class AssertionsTest extends \PHPUnit_Framework_TestCase
+class AssertionsTest extends TestCase
 {
     use Assertions;
 
@@ -181,7 +182,7 @@ class AssertionsTest extends \PHPUnit_Framework_TestCase
         ];
 
         $this->assertArrayMatches([
-            'items' => self::contains(['name' => 'second'])
+            'items' => self::containsEqual(['name' => 'second'])
         ], $array);
     }
 
